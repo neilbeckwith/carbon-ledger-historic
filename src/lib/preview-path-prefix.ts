@@ -35,10 +35,18 @@ export function prefixRewrite(prefix: string): LocationRewrite {
       return url;
     },
     output: ({ url }) => {
-      // TanStack Start also sets the router basepath from Vite's base, so
-      // the prefix may already be on the URL (e.g. on GitHub Pages). Only
-      // add it when it is missing, or the address bar doubles the prefix.
-      if (url.pathname !== prefix && !url.pathname.startsWith(`${prefix}/`)) {
+      // TanStack Start composes this rewrite with its own basepath rewrite,
+      // and this output runs FIRST: whatever it prepends, the basepath
+      // output then prepends again. On GitHub Pages the build base is
+      // /<repo>/, so the basepath output already adds the prefix — prepending
+      // here doubles it in the address bar. Only prepend when the build base
+      // is the site root (the preview hosts); on Pages, do nothing.
+      const buildBase = import.meta.env.BASE_URL ?? "/";
+      if (
+        buildBase === "/" &&
+        url.pathname !== prefix &&
+        !url.pathname.startsWith(`${prefix}/`)
+      ) {
         url.pathname = `${prefix}${url.pathname}`;
       }
       return url;
