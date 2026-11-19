@@ -1,8 +1,10 @@
 # Carbon Ledger
 
-**Live demo:** [Carbon Ledger](https://carbon-ledger-2026.grok.me/)
+[![Deploy to GitHub Pages](https://github.com/neilbeckwith/carbon-ledger-historic/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/neilbeckwith/carbon-ledger-historic/actions/workflows/deploy-pages.yml)
 
-A single page that counts CO₂ in the air and the fluxes that move it between rock, vegetation, soils, cropland, the mixed layer, and the deep ocean. It integrates the 2026 annual rates into running tonne totals, and shows a reconstructed Mauna Loa concentration beside a global-mean concentration used for the atmospheric mass. The same page draws where this year’s emissions go, a compartment diagram (filterable, and clickable by box or arrow), source and sink rows, fast-cycle and slow-geology rows kept out of the books, and a chart of rounded Mauna Loa annual means from 1959 to 2025.
+**Live site:** [neilbeckwith.github.io/carbon-ledger-historic](https://neilbeckwith.github.io/carbon-ledger-historic/) · **Live demo:** [Carbon Ledger](https://carbon-ledger-2026.grok.me/)
+
+A single page that counts CO₂ in the air and the fluxes that move it between rock, vegetation, soils, cropland, the mixed layer, and the deep ocean. It runs entirely in the browser — open the live site and it starts counting, no sign-in or install needed. It integrates the 2026 annual rates into running tonne totals, and shows a reconstructed Mauna Loa concentration beside a global-mean concentration used for the atmospheric mass. The same page draws where this year’s emissions go, a compartment diagram (filterable, and clickable by box or arrow), source and sink rows, fast-cycle and slow-geology rows kept out of the books, and a chart of rounded Mauna Loa annual means from 1959 to 2025.
 
 The page says it is not a live sensor. Between published daily means the station trace follows a seasonal curve plus the yearly trend. The tonne counters spread the annual rates evenly across the year. Rates, stocks, fluxes, the Keeling series, and the cited sources live in `src/lib/budget.ts` and in the methods footer.
 
