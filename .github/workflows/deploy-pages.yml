@@ -26,7 +26,10 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
+      # npm ci fails here: the repo's package-lock.json is out of sync with
+      # package.json (missing ajv/fast-uri entries). Vercel installs with
+      # plain npm install, so Pages does the same.
+      - run: npm install --no-audit --no-fund
       # Prerender the app to static HTML (vite.config.ts enables TanStack
       # Start prerendering) and build it under the /<repo>/ subpath that
       # GitHub Pages project sites are served from.
