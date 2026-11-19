@@ -35,7 +35,12 @@ export function prefixRewrite(prefix: string): LocationRewrite {
       return url;
     },
     output: ({ url }) => {
-      url.pathname = `${prefix}${url.pathname}`;
+      // TanStack Start also sets the router basepath from Vite's base, so
+      // the prefix may already be on the URL (e.g. on GitHub Pages). Only
+      // add it when it is missing, or the address bar doubles the prefix.
+      if (url.pathname !== prefix && !url.pathname.startsWith(`${prefix}/`)) {
+        url.pathname = `${prefix}${url.pathname}`;
+      }
       return url;
     },
   };
