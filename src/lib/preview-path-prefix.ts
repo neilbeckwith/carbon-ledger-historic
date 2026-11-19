@@ -14,7 +14,14 @@ const PATH_BASED_PREVIEW_HOSTS = new Set([
 
 const PORT_ID_PREFIX = /^\/hds-[a-z0-9]+-\d+-[a-z0-9]+(?=\/|$)/i;
 
+// GitHub Pages project sites live under /<repo>/ on <user>.github.io, so the
+// first path segment is the subpath prefix, same as the preview hosts above.
+const GITHUB_PAGES_SEGMENT = /^\/[A-Za-z0-9_.-]+(?=\/|$)/;
+
 export function previewPathPrefix(hostname: string, pathname: string): string | undefined {
+  if (hostname.toLowerCase().endsWith(".github.io")) {
+    return GITHUB_PAGES_SEGMENT.exec(pathname)?.[0];
+  }
   if (!PATH_BASED_PREVIEW_HOSTS.has(hostname.toLowerCase())) return undefined;
   return PORT_ID_PREFIX.exec(pathname)?.[0];
 }
